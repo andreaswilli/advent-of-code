@@ -1,5 +1,5 @@
 // Day n: title
-// Part One/Two
+// Part Two
 const { input } = require("./input.js");
 const { run } = require("../../util/run.js");
 
