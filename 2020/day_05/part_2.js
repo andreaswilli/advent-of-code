@@ -7,20 +7,6 @@ const func = () => {
   let output;
   // let operations = 0; // count the number of operations
 
-  const sortDesc = (seatA, seatB) => {
-    const rowA = seatA.slice(0, 7);
-    const rowB = seatB.slice(0, 7);
-    if (rowA > rowB) {
-      return 1;
-    }
-    if (rowA < rowB) {
-      return -1;
-    }
-    const colA = seatA.slice(7);
-    const colB = seatB.slice(7);
-    return colA < colB ? 1 : -1;
-  };
-
   const calcNum = (str, lower) => {
     let nums = Array(2 ** str.length)
       .fill(null)
@@ -43,20 +29,19 @@ const func = () => {
   };
 
   let occupiedSeats = input.split("\n");
-  occupiedSeats = occupiedSeats.sort(sortDesc);
-  maxSeatId = calcSeatId(occupiedSeats[0]);
-  minSeatId = calcSeatId(occupiedSeats[occupiedSeats.length - 1]);
 
   possibleSeats = Array(127 * 8 + 7)
     .fill(null)
     .map((_, i) => i);
 
-  occupiedSeats.forEach((seat) => {
-    possibleSeats[calcSeatId(seat)] = false;
+  occupiedSeatIds = occupiedSeats.map((seat) => calcSeatId(seat));
+
+  occupiedSeatIds.forEach((seatId) => {
+    possibleSeats[seatId] = false;
   });
 
   output = possibleSeats
-    .slice(minSeatId, maxSeatId)
+    .slice(Math.min(...occupiedSeatIds), Math.max(...occupiedSeatIds))
     .filter((isFree) => isFree !== false);
 
   return { output /*, operations */ };
