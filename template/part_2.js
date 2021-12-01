@@ -5,12 +5,10 @@ const { run } = require("../../util/run.js");
 
 const func = () => {
   let output;
-  // let operations = 0; // count the number of operations
 
   // TODO: add code here
 
-  return { output /*, operations */ };
+  return { output };
 };
 
-// output:
 run(func);
