@@ -3,12 +3,10 @@
 const { input } = require("./input.js");
 const { run } = require("../../util/run.js");
 
-const func = () => {
+run(() => {
   let output;
 
   // TODO: add code here
 
   return { output };
-};
-
-run(func);
+});
