@@ -14,16 +14,14 @@ run(() => {
   const overlapping = new Set();
 
   for (const [[x1, y1], [x2, y2]] of lines) {
-    if (x1 === x2) {
-      // horizontal
-      for (let i = Math.min(y1, y2); i <= Math.max(y1, y2); i++) {
-        processPoint([x1, i]);
-      }
-    } else if (y1 === y2) {
-      // vertical
-      for (let i = Math.min(x1, x2); i <= Math.max(x1, x2); i++) {
-        processPoint([i, y1]);
-      }
+    if (x1 !== x2 && y1 !== y2) continue;
+
+    const distance = Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2));
+    const xDir = getDirection(x1, x2);
+    const yDir = getDirection(y1, y2);
+
+    for (let moved = 0; moved <= distance; moved++) {
+      processPoint([x1 + moved * xDir, y1 + moved * yDir]);
     }
   }
 
@@ -37,5 +35,11 @@ run(() => {
     } else {
       overlapping.add(key);
     }
+  }
+
+  function getDirection(x, y) {
+    if (x < y) return 1; // right or down
+    if (x > y) return -1; // left or up
+    return 0; // no change
   }
 });
