@@ -5,11 +5,9 @@ const { run } = require("../../util/run.js");
 
 run(() => {
   const fish = input.split(",").map(Number);
-  let fishOfAge = initializeFish();
+  let fishOfAge = Array(9).fill(0);
 
-  for (const f of fish) {
-    fishOfAge.set(f, fishOfAge.get(f) + 1);
-  }
+  fish.forEach((f) => fishOfAge[f]++);
 
   for (let i = 0; i < 256; i++) {
     fishOfAge = simulateDay(fishOfAge);
@@ -19,32 +17,20 @@ run(() => {
 
   // helpers
   function simulateDay(fish) {
-    const newFish = initializeFish();
+    const newFish = [];
     for (let i = 0; i < 9; i++) {
       if (i === 6) {
-        newFish.set(i, fish.get(i + 1) + fish.get(0));
+        newFish[i] = fish[i + 1] + fish[0];
       } else if (i === 8) {
-        newFish.set(i, fish.get(0));
+        newFish[i] = fish[0];
       } else {
-        newFish.set(i, fish.get(i + 1));
+        newFish[i] = fish[i + 1];
       }
     }
     return newFish;
   }
 
   function countFish(fish) {
-    let numberOfFish = 0;
-    for (let i = 0; i < 9; i++) {
-      numberOfFish += fish.get(i);
-    }
-    return numberOfFish;
-  }
-
-  function initializeFish() {
-    const fish = new Map();
-    for (let i = 0; i < 9; i++) {
-      fish.set(i, 0);
-    }
-    return fish;
+    return fish.reduce((sum, cur) => sum + cur, 0);
   }
 });
