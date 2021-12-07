@@ -7,8 +7,8 @@ run(() => {
   const positions = input.split(",").map(Number);
   const costMap = new Map();
 
-  let min = 0;
-  let max = positions.length;
+  let min = Math.min(...positions);
+  let max = Math.max(...positions);
 
   while (max - min > 3) {
     const mid = Math.floor((min + max) / 2);
