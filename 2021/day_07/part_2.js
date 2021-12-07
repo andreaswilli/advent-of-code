@@ -5,8 +5,6 @@ const { run } = require("../../util/run.js");
 
 run(() => {
   const positions = input.split(",").map(Number);
-  const costMap = new Map();
-
   let min = Math.min(...positions);
   let max = Math.max(...positions);
 
@@ -33,20 +31,7 @@ run(() => {
   function calculateDistance(targetPos) {
     return positions
       .map((pos) => Math.abs(pos - targetPos))
-      .map(calculateCost)
+      .map((distance) => (distance * (distance + 1)) / 2)
       .reduce((sum, pos) => sum + pos, 0);
-  }
-
-  function calculateCost(distance) {
-    if (costMap.has(distance)) {
-      return costMap.get(distance);
-    }
-
-    let cost = 0;
-    for (let i = 1; i <= distance; i++) {
-      cost += i;
-    }
-    costMap.set(distance, cost);
-    return cost;
   }
 });
