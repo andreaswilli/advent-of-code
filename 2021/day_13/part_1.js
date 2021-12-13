@@ -4,73 +4,34 @@ const { input } = require("./input.js");
 const { run } = require("../../util/run.js");
 
 run(() => {
-  const grid = [];
   let [points, folds] = input
     .split("\n\n")
     .map((section) => section.split("\n"));
 
-  points.forEach((p) => addToGrid(...p.split(",").map(Number)));
-  let gridHeight = grid.length;
-  let gridWidth = grid.reduce((max, row) => Math.max(max, row.length), 0);
+  points = new Set(points);
 
   folds = folds.map((f) => {
     const [axis, position] = f.split(" ")[2].split("=");
     return [axis, Number(position)];
   });
 
-  const [axis, position] = folds[0];
-  fold(axis, position);
+  fold(...folds[0]);
 
-  return { output: countPoints(grid) };
+  return { output: points.size };
 
   // helpers
-  function fold(axis, foldPosition) {
-    if (axis === "x") {
-      for (let row = 0; row < gridHeight; row++) {
-        if (!grid[row]) continue;
+  function fold(axis, foldPos) {
+    const newPoints = new Set();
 
-        for (let col = foldPosition + 1; col < gridWidth; col++) {
-          if (!grid[row][col]) continue;
+    for (const point of points) {
+      const [x, y] = point.split(",");
 
-          const distanceFromFold = col - foldPosition;
-          addToGrid(foldPosition - distanceFromFold, row);
-        }
+      if (axis === "x") {
+        newPoints.add(x > foldPos ? `${2 * foldPos - x},${y}` : point);
+      } else {
+        newPoints.add(y > foldPos ? `${x},${2 * foldPos - y}` : point);
       }
-      gridWidth = foldPosition;
-    } else if (axis === "y") {
-      for (let row = foldPosition + 1; row < gridHeight; row++) {
-        if (!grid[row]) continue;
-
-        for (let col = 0; col < gridWidth; col++) {
-          if (!grid[row][col]) continue;
-
-          const distanceFromFold = row - foldPosition;
-          addToGrid(col, foldPosition - distanceFromFold);
-        }
-      }
-      gridHeight = foldPosition;
+      points = newPoints;
     }
-  }
-
-  function addToGrid(col, row) {
-    if (grid[row] == null) {
-      grid[row] = [];
-    }
-    grid[row][col] = true;
-  }
-
-  function countPoints(grid) {
-    let count = 0;
-
-    for (let row = 0; row < gridHeight; row++) {
-      if (!grid[row]) continue;
-
-      for (let col = 0; col < gridWidth; col++) {
-        if (grid[row][col]) {
-          count++;
-        }
-      }
-    }
-    return count;
   }
 });
