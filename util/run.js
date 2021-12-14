@@ -2,8 +2,16 @@ const { performance } = require("perf_hooks");
 
 exports.run = (func) => {
   const start = performance.now();
-  const { output, operations } = func();
+  const result = func();
+  const { output, operations, expected } = result;
   const time = performance.now() - start;
+
+  if (result.hasOwnProperty("expected")) {
+    console.assert(
+      output === expected,
+      `Output did not match!\n  expected: ${expected}\n  got     : ${output}`
+    );
+  }
 
   const outputData = [
     { label: "Output value", value: `${output}` },
