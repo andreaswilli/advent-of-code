@@ -99,10 +99,8 @@ run(() => {
     .map(() => Array(grid.length).fill(Infinity));
   cost[0][0] = 0;
 
-  let current;
-
   while (unvisited.size() > 0) {
-    current = unvisited.extractMin();
+    const current = unvisited.extractMin();
     const unvisitedNeighbors = getUnvisitedNeighbors(current);
     if (unvisitedNeighbors.length === 0) continue;
 
