@@ -15,7 +15,7 @@ exports.run = (func) => {
 
   const outputData = [
     { label: "Output value", value: `${output}` },
-    { label: "Finished after", value: `${time.toFixed(3)} ms` },
+    { label: "Finished after", value: `${formatTime(time, 1)}` },
   ];
   if (operations != undefined) {
     outputData.push({
@@ -46,4 +46,11 @@ exports.run = (func) => {
   console.log(`‖${" ".repeat(outputLines[0].length - 2)}‖`);
   console.log(`★ ${"=".repeat(outputLines[0].length - 4)} ★`);
   console.log("\n");
+
+  function formatTime(timeMs, decPlaces) {
+    if (timeMs < 1) return `${(timeMs * 1000).toFixed(decPlaces)} μs`;
+    if (timeMs < 1000) return `${timeMs.toFixed(decPlaces)} ms`;
+    if (timeMs < 1000 * 60) return `${(timeMs / 1000).toFixed(decPlaces)} s`;
+    return `${(timeMs / (1000 * 60)).toFixed(decPlaces)} min`;
+  }
 };
