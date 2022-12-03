@@ -5,15 +5,15 @@ const { run } = require("../../util/run.js");
 
 run(() => {
   const value = {
-    AZ: 2,
-    BX: 1,
-    CY: 3,
-    AX: 3,
-    BY: 2,
-    CZ: 1,
     AY: 1,
-    BZ: 3,
+    BX: 1,
+    CZ: 1,
+    AZ: 2,
+    BY: 2,
     CX: 2,
+    AX: 3,
+    BZ: 3,
+    CY: 3,
   };
   const scoreTable = { X: 0, Y: 3, Z: 6 };
 
