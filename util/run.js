@@ -1,6 +1,8 @@
 const { performance } = require("perf_hooks");
 
 exports.run = (func) => {
+  console.clear();
+
   const start = performance.now();
   const result = func();
   const { output, operations, expected } = result;
