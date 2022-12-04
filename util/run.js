@@ -9,10 +9,12 @@ exports.run = (func) => {
   const time = performance.now() - start;
 
   if (result.hasOwnProperty("expected")) {
+    console.log("\x1b[31m");
     console.assert(
       output === expected,
       `Output did not match!\n  expected: ${expected}\n  got     : ${output}`
     );
+    console.log("\x1b[0m");
   }
 
   const outputData = [
@@ -39,7 +41,6 @@ exports.run = (func) => {
       )}  ‖`
   );
 
-  console.log("\n");
   console.log(`★ ${"=".repeat(outputLines[0].length - 4)} ★`);
   console.log(`‖${" ".repeat(outputLines[0].length - 2)}‖`);
   outputLines.forEach((line) => {
