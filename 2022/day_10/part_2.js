@@ -27,7 +27,7 @@ run(() => {
 
   let line = "";
   for (let i = 1; i <= cycle; i++) {
-    line += litPixels.has(i) ? "#" : ".";
+    line += litPixels.has(i) ? "█" : " ";
     if (i % 40 === 0) {
       console.log(line);
       line = "";
