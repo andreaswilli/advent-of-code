@@ -155,3 +155,5 @@ run(() => {
     return `${col},${row}`;
   }
 });
+
+exports.PriorityQueue = PriorityQueue;
