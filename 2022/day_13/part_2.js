@@ -10,7 +10,7 @@ run(() => {
   const packets = input
     .split("\n\n")
     .map((pair) => pair.split("\n").map(JSON.parse))
-    .reduce((acc, cur) => acc.concat(cur), []);
+    .flat();
 
   const compare = (l, r) => {
     if (l == null && r == null) return 0;
