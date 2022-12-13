@@ -5,7 +5,7 @@ const { run } = require("../../util/run.js");
 
 run(() => {
   const packets = input.split("\n\n").map((pair, i) => {
-    const [l, r] = pair.split("\n").map(eval);
+    const [l, r] = pair.split("\n").map(JSON.parse);
     return { i: i + 1, l, r };
   });
 
