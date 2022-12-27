@@ -44,6 +44,8 @@ exports.run = (func) => {
   console.log(`‖${" ".repeat(outputLines[0].length - 2)}‖`);
   console.log(`★ ${"=".repeat(outputLines[0].length - 4)} ★` + "\x1b[0m");
 
+  process.exit(expected == null || expected === output ? 0 : 1);
+
   function formatTime(timeMs, decPlaces) {
     if (timeMs < 1) return `${(timeMs * 1000).toFixed(decPlaces)} μs`;
     if (timeMs < 1000) return `${timeMs.toFixed(decPlaces)} ms`;
