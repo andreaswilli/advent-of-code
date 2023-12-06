@@ -9,8 +9,8 @@ run(() => {
     .map((line) => line.split(/: +/)[1].replace(/ /g, '')).map(Number);
 
   let waysToBeat = 0;
-    for (let i = 1; i < time; i++) {
-      if (i * (time - i) > distance) {
+    for (let waitTime = 1; waitTime < time; waitTime++) {
+      if (waitTime * (time - waitTime) > distance) {
         waysToBeat += 1;
       }
     }

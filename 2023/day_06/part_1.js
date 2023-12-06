@@ -11,8 +11,8 @@ run(() => {
   const waysToBeat = [];
   for (let i = 0; i < times.length; i++) {
     let ways = 0;
-    for (let j = 1; j < times[i]; j++) {
-      if (j * (times[i] - j) > distances[i]) {
+    for (let waitTime = 1; waitTime < times[i]; waitTime++) {
+      if (waitTime * (times[i] - waitTime) > distances[i]) {
         ways += 1;
       }
     }
