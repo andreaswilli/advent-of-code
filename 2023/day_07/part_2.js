@@ -17,10 +17,10 @@ run(() => {
     const maxOfAKind = Math.max(0, Math.max(...cardCounts.values()));
     const differentCards = cardCounts.size;
 
-    if (maxOfAKind === 5 || maxOfAKind + numJokers === 5) return 7; // Five of a kind
-    if (maxOfAKind === 4 || maxOfAKind + numJokers === 4) return 6; // Four of a kind
+    if (differentCards <= 1) return 7; // Five of a kind
+    if (maxOfAKind + numJokers === 4) return 6; // Four of a kind
     if (differentCards <= 2) return 5; // Full house
-    if (maxOfAKind === 3 || maxOfAKind + numJokers === 3) return 4; // Three of a kind
+    if (maxOfAKind + numJokers === 3) return 4; // Three of a kind
     if (differentCards <= 3) return 3; // Two pair
     if (differentCards <= 4) return 2; // One pair
     return 1; // High card
