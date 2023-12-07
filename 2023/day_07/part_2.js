@@ -26,41 +26,27 @@ run(() => {
     return 1; // High card
   }
 
-  function getCardValue(card) {
-    return [
-      "J",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "T",
-      "Q",
-      "K",
-      "A",
-    ].indexOf(card);
-  }
+  const order = "J23456789TQKA";
 
-  const hands = input.split("\n").map((line) => {
-    const [cards, bid] = line.split(" ");
-    return { cards, bid: Number(bid), type: getType(cards) };
-  });
+  const sortedHands = input
+    .split("\n")
+    .map((line) => {
+      const [cards, bid] = line.split(" ");
+      return [
+        getType(cards),
+        cards
+          .split("")
+          // convert to different base to make sure it can be represented with
+          // a single digit (for lexicographical sorting)
+          .map((c) => order.indexOf(c).toString(order.length))
+          .join(""),
+        Number(bid),
+      ];
+    })
+    .sort();
 
-  hands.sort(
-    (a, b) =>
-      a.type - b.type ||
-      getCardValue(a.cards[0]) - getCardValue(b.cards[0]) ||
-      getCardValue(a.cards[1]) - getCardValue(b.cards[1]) ||
-      getCardValue(a.cards[2]) - getCardValue(b.cards[2]) ||
-      getCardValue(a.cards[3]) - getCardValue(b.cards[3]) ||
-      getCardValue(a.cards[4]) - getCardValue(b.cards[4])
-  );
-
-  const winnings = hands.reduce(
-    (total, hand, i) => total + hand.bid * (i + 1),
+  const winnings = sortedHands.reduce(
+    (total, hand, i) => total + hand.slice(-1)[0] * (i + 1),
     0
   );
 
