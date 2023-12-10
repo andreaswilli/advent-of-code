@@ -60,25 +60,25 @@ run(() => {
     if (pipeLoop.has(key(pos))) return false;
 
     let numPipes = 0;
-    let i = 0;
-    while (i < pos.col) {
-      if (pipeLoop.has(key({ row: pos.row, col: i }))) {
-        if (["L", "F"].includes(grid[pos.row][i])) {
-          const horizontalStart = grid[pos.row][i];
-          do {
-            i += 1;
-          } while (grid[pos.row][i] === "-");
-          if (
-            (horizontalStart === "L" && grid[pos.row][i] === "7") ||
-            (horizontalStart === "F" && grid[pos.row][i] === "J")
-          ) {
-            numPipes += 1;
-          }
-        } else {
-          numPipes += 1;
-        }
+    for (let i = 0; i < pos.col; i++) {
+      if (!pipeLoop.has(key({ row: pos.row, col: i }))) continue;
+
+      if (!["L", "F"].includes(grid[pos.row][i])) {
+        numPipes += 1;
+        continue;
       }
-      i += 1;
+
+      const horizontalStart = grid[pos.row][i];
+
+      do i += 1;
+      while (grid[pos.row][i] === "-");
+
+      if (
+        (horizontalStart === "L" && grid[pos.row][i] === "7") ||
+        (horizontalStart === "F" && grid[pos.row][i] === "J")
+      ) {
+        numPipes += 1;
+      }
     }
     return numPipes % 2 === 1;
   }
