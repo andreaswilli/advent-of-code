@@ -4,11 +4,10 @@ const { input } = require("./input.js");
 const { run } = require("../../util/run.js");
 
 run(() => {
-  const FACTOR = 5;
   const rows = input.split("\n").map((row) => {
     const [springs, nums] = row.split(" ");
-    const newSprings = Array.from({ length: FACTOR }, () => springs).join("?");
-    const newNums = Array.from({ length: FACTOR }, () => nums).join(",");
+    const newSprings = Array.from({ length: 5 }, () => springs).join("?");
+    const newNums = Array.from({ length: 5 }, () => nums).join(",");
     return [newSprings, newNums.split(",").map(Number)];
   });
 
