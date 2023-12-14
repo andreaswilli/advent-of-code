@@ -1,5 +1,5 @@
 // Day 12: Hot Springs
-// Part One
+// Part Two
 const { input } = require("./input.js");
 const { run } = require("../../util/run.js");
 
