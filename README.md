@@ -4,6 +4,8 @@ This repo contains my solutions for the [Advent of Code](https://adventofcode.co
 
 ## How to run
 
+### JS
+
 Run with Node.js:
 
 ```bash
@@ -19,4 +21,10 @@ The following output should be printed:
 ‖  Time   : 578.3 μs  ‖
 ‖                     ‖
 ★ =================== ★
+```
+
+### Nix
+
+```bash
+nix eval --experimental-features pipe-operator --extra-experimental-features nix-command --extra-experimental-features flakes --file 2024/day_01/solution.nix
 ```
