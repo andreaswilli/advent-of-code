@@ -1,4 +1,5 @@
 with (import <nixpkgs> { }).lib;
+with (import ../../lib/lib.nix);
 let
 in
 {

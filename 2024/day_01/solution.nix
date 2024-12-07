@@ -1,7 +1,6 @@
 with (import <nixpkgs> { }).lib;
+with (import ../../lib/nix);
 let
-  abs = x: if (x < 0) then -x else x;
-  sum = fold add 0;
   lines = readFile ./input.txt |> trim |> splitString "\n" |> map (splitString "   ");
   leftRight = (
     lines: {
@@ -9,8 +8,6 @@ let
       right = lines |> map last;
     }
   );
-  getCount = counter: el: if (counter ? ${el}) then counter.${el} else 0;
-  toCounter = fold (x: acc: acc // { ${x} = (getCount acc x) + 1; }) { };
 in
 {
   part1 =
