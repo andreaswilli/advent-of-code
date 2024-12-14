@@ -5,5 +5,6 @@ rec {
   prod = fold builtins.mul 1;
 
   getCount = counter: el: if (counter ? ${el}) then counter.${el} else 0;
-  toCounter = fold (x: acc: acc // { ${x} = (getCount acc x) + 1; }) { };
+  toCounter = toCounterBy (id: id);
+  toCounterBy = keyFn: l: l |> groupBy keyFn |> mapAttrs (name: val: length val);
 }
