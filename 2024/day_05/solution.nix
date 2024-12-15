@@ -1,4 +1,3 @@
-with (import <nixpkgs> { }).lib;
 with (import ../../lib/nix);
 let
   input = readFile ./input.txt |> trim |> splitString "\n\n";
@@ -38,6 +37,5 @@ let
 in
 {
   part1 = updates |> filter isInCorrectOrder |> result;
-
   part2 = updates |> filter (update: !isInCorrectOrder update) |> map order |> result;
 }

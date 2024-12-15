@@ -1,4 +1,3 @@
-with (import <nixpkgs> { }).lib;
 with (import ../../lib/nix);
 let
   lines = readFile ./input.txt |> trim |> splitString "\n" |> map (splitString "   ");

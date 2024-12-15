@@ -1,4 +1,4 @@
-with (import <nixpkgs> { }).lib;
+with import ./pkgs.nix;
 with (import ./strings.nix);
 let
   _traverseDiagonal =

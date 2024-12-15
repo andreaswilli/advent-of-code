@@ -1,4 +1,3 @@
-with (import <nixpkgs> { }).lib;
 with (import ../../lib/nix);
 let
   reports =

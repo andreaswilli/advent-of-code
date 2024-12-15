@@ -1,4 +1,4 @@
-with (import <nixpkgs> { }).lib;
+with import ./pkgs.nix;
 rec {
   abs = x: if (x < 0) then -x else x;
   sum = fold add 0;

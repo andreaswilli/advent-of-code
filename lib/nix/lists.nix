@@ -1,4 +1,4 @@
-with (import <nixpkgs> { }).lib;
+with import ./pkgs.nix;
 rec {
   slidingWindow2 = l: zipLists l (tail l);
 

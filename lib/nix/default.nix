@@ -1,4 +1,5 @@
-import ./math.nix
+import ./pkgs.nix
+// import ./math.nix
 // import ./lists.nix
 // import ./regex.nix
 // import ./strings.nix

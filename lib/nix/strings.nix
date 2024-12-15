@@ -1,4 +1,4 @@
-with (import <nixpkgs> { }).lib;
+with import ./pkgs.nix;
 rec {
   charAt = str: i: substring i 1 str;
   toChars =
