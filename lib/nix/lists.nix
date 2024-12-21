@@ -4,7 +4,10 @@ with import ./math.nix;
 rec {
   indexOf = x: l: lists.findFirstIndex (el: el == x) null l;
   includes = x: l: indexOf x l != null;
+
   listOfLen = n: range 1 n |> map (const null);
+  repeat = n: l: listOfLen n |> map (const l);
+
   slidingWindow2 = l: zipLists l (tail l);
   distinctPairs =
     l:
