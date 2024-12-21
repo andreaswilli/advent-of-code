@@ -1,6 +1,18 @@
 with import ./pkgs.nix;
+with import ./logic.nix;
+with import ./math.nix;
 rec {
+  indexOf = x: l: lists.findFirstIndex (el: el == x) null l;
+  includes = x: l: indexOf x l != null;
+  listOfLen = n: range 1 n |> map (const null);
   slidingWindow2 = l: zipLists l (tail l);
+  distinctPairs =
+    l:
+    cartesianProduct {
+      fst = l;
+      snd = l;
+    }
+    |> (filter ({ fst, snd }: if (fst.row != snd.row) then fst.row < snd.row else fst.col < snd.col));
 
   mergeOrderedLists =
     compare: a: b:

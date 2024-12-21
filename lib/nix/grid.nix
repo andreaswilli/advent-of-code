@@ -1,5 +1,6 @@
 with import ./pkgs.nix;
-with (import ./strings.nix);
+with import ./strings.nix;
+with import ./logic.nix;
 let
   _traverseDiagonal =
     row: col: grid:
@@ -13,7 +14,13 @@ let
     (if (elemAt grid 0 |> isString) then grid |> map toChars else grid)
     |> fn
     |> (
-      result: if (elemAt (elemAt result 0) 0 |> isString) then result |> map concatStrings else result
+      result:
+      if (result |> not isList) then
+        result
+      else if ((elemAt (elemAt result 0) 0) |> isString) then
+        result |> map concatStrings
+      else
+        result
     );
 
   exports = {

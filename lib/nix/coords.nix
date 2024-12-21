@@ -33,4 +33,9 @@ in
       row = row + d.row;
       col = col + d.col;
     };
+
+  inBoundsOf =
+    grid:
+    { row, col, ... }:
+    row >= 0 && row < (length grid) && col >= 0 && col < (length (elemAt grid row));
 }
