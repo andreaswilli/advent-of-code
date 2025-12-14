@@ -13,7 +13,7 @@ let
       }
     );
 
-  compact =
+  compactBlocks =
     disk:
     genericClosure {
       startSet =
@@ -113,6 +113,6 @@ let
     files |> foldl' (acc: file: acc ++ (repeat file.size file.id)) [ ] |> imap0 (i: id: i * id) |> sum;
 in
 {
-  part1 = disk |> compact |> checksum;
-  part2 = null;
+  part1 = disk |> compactBlocks |> checksum;
+  part2 = disk |> compactFiles;
 }
