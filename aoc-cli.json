@@ -1,0 +1,32 @@
+{
+  "engines": [
+    {
+      "name": "node",
+      "cmd": "node {{entryFile}}",
+      "entryFile": "solution.js",
+      "extraFiles": ["lib/node"]
+    },
+    {
+      "name": "python",
+      "cmd": "python {{entryFile}}",
+      "entryFile": "solution.py"
+    },
+    {
+      "name": "go",
+      "cmd": "go run {{entryFile}}",
+      "entryFile": "solution.go"
+    },
+    {
+      "name": "nix",
+      "cmd": "nix eval --quiet --experimental-features pipe-operator --extra-experimental-features nix-command --extra-experimental-features flakes --file {{entryFile}}",
+      "entryFile": "solution.nix",
+      "extraFiles": ["lib/nix"]
+    },
+    {
+      "name": "haskell",
+      "cmd": "runhaskell {{entryFile}}",
+      "entryFile": "solution.hs",
+      "extraFiles": ["lib/haskell"]
+    }
+  ]
+}
